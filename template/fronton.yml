@@ -1,0 +1,20 @@
+assets:
+  - application.js
+  - application.css
+assets_paths:
+  - assets/javascripts
+  - assets/stylesheets
+  - assets/fonts
+  - assets/images
+  - vendor/javascripts
+  - vendor/stylesheets
+  - vendor/fonts
+  - vendor/images
+dependencies:
+  - rails-assets-jquery: 3.1.0
+  - skim: 0.10.0
+output: public
+pages:
+  - index: /
+pages_paths:
+  - pages
