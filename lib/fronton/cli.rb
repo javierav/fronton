@@ -1,3 +1,4 @@
+require 'fileutils'
 require 'rack'
 require 'thor'
 require 'fronton/config'
@@ -54,7 +55,7 @@ module Fronton
 
       Rack::Server.start(
         app: app,
-        environment: :development,
+        environment: 'development',
         Port: options[:port]
       )
     end
@@ -79,7 +80,8 @@ module Fronton
       # compile assets
       config.manifest.compile(config.assets)
 
-      # TODO, compile html pages
+      # compile html pages
+      config.pages.map(&:save)
     end
 
     desc 'clean', 'Remove old assets'
@@ -90,7 +92,11 @@ module Fronton
 
     desc 'clobber', 'Remove all assets'
     def clobber
+      # assets
       config.manifest.clobber
+
+      # html
+      FileUtils.rm Dir.glob(config.output.join('*.html'))
     end
 
     desc 'info', 'Information about project'

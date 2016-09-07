@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.bindir = 'bin'
   spec.executables = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = %w(lib)
-  spec.files = `git ls-files -z -- lib bin LICENSE README.md fronton.gemspec`.split("\x0")
+  spec.files = `git ls-files -z -- lib bin template LICENSE README.md fronton.gemspec`.split("\x0")
   spec.extra_rdoc_files = %w(README.md LICENSE)
   spec.required_ruby_version = '~> 2.3'
 
@@ -30,6 +30,5 @@ Gem::Specification.new do |spec|
   #
   spec.add_dependency 'thor',      '~> 0.19', '>= 0.19.1'
   spec.add_dependency 'rack',      '~> 2.0', '>= 2.0.1'
-  spec.add_dependency 'slim',      '~> 3.0', '>= 3.0.7'
   spec.add_dependency 'sprockets', '~> 3.7'
 end

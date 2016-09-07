@@ -8,8 +8,7 @@ module Fronton
 
     # Rack entrypoint
     def call(env)
-      if requested_page(env)
-        page = Fronton::Page.new(requested_page(env), config: @config)
+      if page = requested_page(env) # rubocop:disable Lint/AssignmentInCondition
 
         if page.exist?
           render_page(page)
@@ -24,7 +23,7 @@ module Fronton
     private
 
     def requested_page(env)
-      @config.pages.key(env['PATH_INFO'])
+      @config.pages.find { |page| page.url == env['PATH_INFO'] }
     end
 
     def render_page(page)

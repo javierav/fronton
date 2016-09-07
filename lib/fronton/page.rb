@@ -1,16 +1,15 @@
-require 'slim'
-require 'slim/include'
 require 'tilt'
 require 'fronton/assets_helpers'
 
 module Fronton
   class Page
-    attr_reader :name, :config
+    attr_reader :name, :url, :config
 
-    def initialize(name, options = {})
+    def initialize(name, url, options = {})
       @name   = name
       @config = options.fetch(:config)
       @digest = options.fetch(:digest, false)
+      @url    = url
     end
 
     def content
@@ -18,7 +17,9 @@ module Fronton
     end
 
     def save
-      File.open(save_path, 'w') { |f| f.write(content) }
+      with_digest do
+        File.open(save_path, 'w') { |f| f.write(content) }
+      end
     end
 
     def exist?
@@ -29,28 +30,28 @@ module Fronton
 
     def template_path
       found_path = config.pages_paths.find do |path|
-        File.exist?(path.join("#{name}.slim"))
+        File.exist?(path.join(name))
       end
 
-      found_path = found_path.join("#{name}.slim") if found_path
+      found_path = found_path.join(name) if found_path
 
       found_path
     end
 
     def template_options
-      { disable_escape: true, pretty: true, include_dirs: partials_paths }
+      { disable_escape: true, pretty: true }
     end
 
     def helpers_options
       { digest: @digest, manifest: @config.manifest }
     end
 
-    def partials_paths
-      config.pages_paths.map { |path| path.join('partials') }
+    def save_path
+      config.output.join("#{File.basename(name, '.*')}.html")
     end
 
-    def save_path
-      config.output.join("#{name}.html")
+    def with_digest
+      @digest = true; yield; @digest = false # rubocop:disable Style/Semicolon
     end
   end
 end

@@ -43,7 +43,7 @@ module Fronton
     end
 
     def output
-      @output ||= working_dir.join(@config['output'] || 'public').join('assets')
+      @output ||= working_dir.join(@config['output'] || 'public')
     end
 
     def dependencies
@@ -56,19 +56,13 @@ module Fronton
       end
     end
 
-    # TODO, rewrite this to use instances of Page
     def pages
       @pages ||= begin
         pages = @config['pages'].is_a?(Array) ? @config['pages'] : []
-        result = {}
 
-        pages.each do |page|
-          result[page.keys.first] = page.values.first
+        pages.map do |page|
+          Page.new(page.keys.first, page.values.first, config: self)
         end
-
-        result['index'] = '/' if result.empty?
-
-        result
       end
     end
 
@@ -110,7 +104,7 @@ module Fronton
     end
 
     def manifest
-      @manifest ||= Sprockets::Manifest.new environment, File.join(output, 'manifest.json')
+      @manifest ||= Sprockets::Manifest.new environment, File.join(output, 'assets', 'manifest.json')
     end
 
     #
