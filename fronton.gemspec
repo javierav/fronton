@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   #
   spec.name = 'fronton'
   spec.version = Fronton.version
-  spec.summary = ''
+  spec.summary = 'A command-line tool for build frontend apps in Ruby'
   spec.description = nil
   spec.author = 'Javier Aranda'
   spec.email = 'javier.aranda.varo@gmail.com'
@@ -19,9 +19,9 @@ Gem::Specification.new do |spec|
   ## GEM
   #
   spec.bindir = 'bin'
-  spec.executables = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = %w(lib)
   spec.files = `git ls-files -z -- lib bin template LICENSE README.md fronton.gemspec`.split("\x0")
+  spec.executables = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.extra_rdoc_files = %w(README.md LICENSE)
   spec.required_ruby_version = '~> 2.3'
 
