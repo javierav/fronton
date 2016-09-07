@@ -10,6 +10,9 @@ assets_paths:
   - vendor/stylesheets
   - vendor/fonts
   - vendor/images
+compressors:
+  css: scss
+  js: uglifier
 dependencies:
   - rails-assets-jquery: 3.1.0
   - slim: 3.0.7

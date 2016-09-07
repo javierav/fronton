@@ -28,7 +28,16 @@ Gem::Specification.new do |spec|
   #
   ## DEPENDENCIES
   #
-  spec.add_dependency 'thor',      '~> 0.19', '>= 0.19.1'
-  spec.add_dependency 'rack',      '~> 2.0', '>= 2.0.1'
+  spec.add_dependency 'thor',      '~> 0.19'
+  spec.add_dependency 'rack',      '~> 2.0'
   spec.add_dependency 'sprockets', '~> 3.7'
+
+  #
+  ## DEVELOPMENT DEPENDENCIES
+  #
+  spec.add_development_dependency 'coveralls',          '~> 0.8'
+  spec.add_development_dependency 'minitest',           '~> 5.9'
+  spec.add_development_dependency 'minitest-reporters', '~> 1.1'
+  spec.add_development_dependency 'rake',               '~> 11.2'
+  spec.add_development_dependency 'simplecov',          '~> 0.12'
 end

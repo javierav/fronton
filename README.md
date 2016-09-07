@@ -2,8 +2,17 @@
 
 A command-line tool for build frontend apps in Ruby.
 
+It uses [Sprockets](https://github.com/rails/sprockets) and
+[Tilt](https://github.com/rtomayko/tilt) to creates an environment for assets
+compiling similar to
+[Rails Assets Pipeline](http://guides.rubyonrails.org/asset_pipeline.html). It
+support all engines supported by *Sprockets* and *Tilt* like *Javascript*,
+*Sass*, *CoffeeScript*, *Haml*, *Slim*, etc.
+
 
 ## Status
+
+[![Gem Version](https://badge.fury.io/rb/fronton.svg)](https://badge.fury.io/rb/fronton)
 
 > **This project is still experimental, use with caution!**
 
@@ -11,20 +20,71 @@ A command-line tool for build frontend apps in Ruby.
 ## Installation
 
 ```
-$ gem install fronton
+$ gem install fronton --pre
 ```
 
-`TODO`: Write an advanced installation guide
 
+## Getting Started
 
-## Usage
+### Available commands
 
-`TODO`: Write usage instructions here
+* **fronton new**: generate a new blank app with a default skeleton.
+* **fronton server**: start a development server for html & assets.
+* **fronton compile**: compile html & assets files for distribution.
+* **fronton clean**: remove old compiled html & assets files.
+* **fronton clobber**: remove all compiled html & assets files.
+* **fronton info**: show information about the environment.
+* **fronton help**: show commands help.
+
+### Config file
+
+Configuration options are readed from a `fronton.yml` file located in project
+top folder.
+
+```yaml
+assets:
+  - application.js
+  - application.css
+assets_paths:
+  - assets/javascripts
+  - assets/stylesheets
+  - assets/fonts
+  - assets/images
+  - vendor/javascripts
+  - vendor/stylesheets
+  - vendor/fonts
+  - vendor/images
+compressors:
+  css: scss
+  js: uglifier
+dependencies:
+  - rails-assets-jquery: 3.1.0
+  - slim: 3.0.7
+output: public
+pages:
+  - index.slim: /
+pages_paths:
+  - pages
+```
+
+| Attribute    | Type   | Description                                                |
+| ------------ | ------ | ---------------------------------------------------------- |
+| assets       | Array  | List of assets to compile (only js and css files)          |
+| assets_paths | Array  | List of directories where Sprockets find files for require |
+| compressors  | Hash   | Hash with selected compressors by type                     |
+| dependencies | Array  | List of gems to install and require                        |
+| output       | String | Path to a directory where compiled assets will be written  |
+| pages        | Array  | List of pages to compile                                   |
+| pages_paths  | Array  | List of directories where Fronton find html files          |
 
 
 ## Testing
 
-`TODO`: Write how to test
+Tests are written using *Minitest*.
+
+```
+$ bundle exec rake
+```
 
 
 ## Contributing
