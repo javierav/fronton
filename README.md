@@ -77,6 +77,38 @@ pages_paths:
 | pages        | Array  | List of pages to compile                                   |
 | pages_paths  | Array  | List of directories where Fronton find html files          |
 
+### Gem sources
+
+In order to allow **Fronton** to install project gem dependencies automatically,
+if you use gems from others sources than `https://rubygems.org` like
+`https://rails-assets.org`, you must add these sources to rubygems configuration
+file.
+
+```
+$ gem sources --add https://rails-assets.org
+```
+
+### Proposed folders hierarchy
+
+```
+.
+├── assets
+│   ├── fonts
+│   ├── images
+│   ├── javascripts
+│   └── stylesheets
+├── fronton.yml
+├── locales
+│   └── es
+│       └── index.yml
+├── pages
+├── public
+└── vendor
+    ├── fonts
+    ├── images
+    ├── javascripts
+    └── stylesheets
+```
 
 ## Testing
 
