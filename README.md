@@ -45,6 +45,7 @@ top folder.
 assets:
   - application.js
   - application.css
+  - "*.png"
 assets_paths:
   - assets/javascripts
   - assets/stylesheets

@@ -42,6 +42,10 @@ module Fronton
       end
     end
 
+    def assets_url
+      @config['assets_url'] || '/assets'
+    end
+
     def output
       @output ||= working_dir.join(@config['output'] || 'public')
     end

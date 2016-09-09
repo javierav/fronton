@@ -5,7 +5,7 @@ require 'fronton/config'
 require 'fronton/html_server'
 
 module Fronton
-  class CLI < Thor
+  class CLI < Thor # rubocop:disable Metrics/ClassLength
     include Thor::Actions
 
     def self.source_root
@@ -46,6 +46,17 @@ module Fronton
       # require dependencies for rails assets
       config.require_dependencies
 
+      # assets helpers
+      config.environment.context_class.class_eval do
+        def asset_path(path, _options = {})
+          "assets/#{path}"
+        end
+
+        def asset_url(path, _options = {})
+          "url(#{asset_path(path)})"
+        end
+      end
+
       conf = config
 
       app = Rack::Builder.new do
@@ -76,6 +87,24 @@ module Fronton
       if config.compressor_css
         config.environment.css_compressor = config.compressor_css.to_sym
       end
+
+      # assets helpers
+      config.environment.context_class.class_eval do
+        class << self
+          attr_accessor :fronton_config
+        end
+
+        def asset_path(path, _options = {})
+          path = self.class.superclass.fronton_config.manifest.assets[path]
+          "#{self.class.superclass.fronton_config.assets_url}/#{path}"
+        end
+
+        def asset_url(path, _options = {})
+          "url(#{asset_path(path)})"
+        end
+      end
+
+      config.environment.context_class.fronton_config = config
 
       # compile assets
       config.manifest.compile(config.assets)

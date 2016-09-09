@@ -1,6 +1,7 @@
 assets:
   - application.js
   - application.css
+  - "*.png"
 assets_paths:
   - assets/javascripts
   - assets/stylesheets
@@ -10,6 +11,7 @@ assets_paths:
   - vendor/stylesheets
   - vendor/fonts
   - vendor/images
+assets_url: https://assets.example.com
 compressors:
   css: scss
   js: uglifier
