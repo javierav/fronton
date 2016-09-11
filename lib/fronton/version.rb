@@ -3,7 +3,7 @@ module Fronton
     MAJOR = 0
     MINOR = 1
     TINY  = 0
-    PRE   = 'alpha'.freeze
+    PRE   = 'beta1'.freeze
 
     STRING = [MAJOR, MINOR, TINY, PRE].compact.join('.')
   end
