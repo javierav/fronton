@@ -55,6 +55,7 @@ assets_paths:
   - vendor/stylesheets
   - vendor/fonts
   - vendor/images
+assets_url: https://assets.example.com
 compressors:
   css: scss
   js: uglifier
@@ -72,6 +73,7 @@ pages_paths:
 | ------------ | ------ | ---------------------------------------------------------- |
 | assets       | Array  | List of assets to compile (only js and css files)          |
 | assets_paths | Array  | List of directories where Sprockets find files for require |
+| assets_url   | String | URL for assets in production                               |
 | compressors  | Hash   | Hash with selected compressors by type                     |
 | dependencies | Array  | List of gems to install and require                        |
 | output       | String | Path to a directory where compiled assets will be written  |
