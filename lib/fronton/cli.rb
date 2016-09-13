@@ -142,12 +142,16 @@ module Fronton
       puts ''
 
       say 'Assets Paths', :bold
-      config.assets_paths.each { |path| puts path.to_s }
+      config.assets_paths.each do |path|
+        say path.to_s, Dir.exist?(path) ? nil : :red
+      end
 
       puts ''
 
       say 'Pages Paths', :bold
-      config.pages_paths.each { |path| puts path.to_s }
+      config.pages_paths.each do |path|
+        say path.to_s, Dir.exist?(path) ? nil : :red
+      end
 
       puts ''
 

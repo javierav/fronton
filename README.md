@@ -20,7 +20,7 @@ support all engines supported by *Sprockets* and *Tilt* like *Javascript*,
 ## Installation
 
 ```
-$ gem install fronton --pre
+$ gem install fronton
 ```
 
 
