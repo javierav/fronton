@@ -62,6 +62,7 @@ compressors:
 dependencies:
   - rails-assets-jquery: 3.1.0
   - slim: 3.0.7
+fallback_page: index.slim
 output: public
 pages:
   - index.slim: /
@@ -69,16 +70,17 @@ pages_paths:
   - pages
 ```
 
-| Attribute    | Type   | Description                                                |
-| ------------ | ------ | ---------------------------------------------------------- |
-| assets       | Array  | List of assets to compile (only js and css files)          |
-| assets_paths | Array  | List of directories where Sprockets find files for require |
-| assets_url   | String | URL for assets in production                               |
-| compressors  | Hash   | Hash with selected compressors by type                     |
-| dependencies | Array  | List of gems to install and require                        |
-| output       | String | Path to a directory where compiled assets will be written  |
-| pages        | Array  | List of pages to compile                                   |
-| pages_paths  | Array  | List of directories where Fronton find html files          |
+| Attribute     | Type   | Description                                                |
+| ------------- | ------ | ---------------------------------------------------------- |
+| assets        | Array  | List of assets to compile (only js and css files)          |
+| assets_paths  | Array  | List of directories where Sprockets find files for require |
+| assets_url    | String | URL for assets in production                               |
+| compressors   | Hash   | Hash with selected compressors by type                     |
+| dependencies  | Array  | List of gems to install and require                        |
+| fallback_page | String | Fallback page (i.e HTML5 mode in frontend routers)         |
+| output        | String | Path to a directory where compiled assets will be written  |
+| pages         | Array  | List of pages to compile                                   |
+| pages_paths   | Array  | List of directories where Fronton find html files          |
 
 ### Gem sources
 

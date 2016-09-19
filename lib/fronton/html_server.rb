@@ -16,7 +16,13 @@ module Fronton
           error_404
         end
       else
-        error_404
+        fallback = @config.fallback_page
+
+        if fallback
+          render_page(fallback)
+        else
+          error_404
+        end
       end
     end
 

@@ -60,6 +60,12 @@ module Fronton
       end
     end
 
+    def fallback_page
+      if @config['fallback_page']
+        Page.new(@config['fallback_page'], '/', config: self)
+      end
+    end
+
     def pages
       @pages ||= begin
         pages = @config['pages'].is_a?(Array) ? @config['pages'] : []

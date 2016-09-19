@@ -18,6 +18,7 @@ compressors:
 dependencies:
   - rails-assets-jquery: 3.1.0
   - slim: 3.0.7
+fallback_page: index.slim
 output: public
 pages:
   - index.slim: /

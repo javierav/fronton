@@ -18,7 +18,7 @@ module Fronton
 
     def asset_path(name)
       asset_name = @use_digest && @manifest.assets[name] ? @manifest.assets[name] : name
-      "#{@prefix}/#{asset_name}"
+      "/#{@prefix}/#{asset_name}"
     end
   end
 end
