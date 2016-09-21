@@ -49,7 +49,7 @@ module Fronton
       # assets helpers
       config.environment.context_class.class_eval do
         def asset_path(path, _options = {})
-          "assets/#{path}"
+          "/assets/#{path}"
         end
 
         def asset_url(path, _options = {})
