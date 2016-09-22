@@ -38,7 +38,8 @@ module Fronton
     end
 
     desc 'server', 'Preview your app in browser'
-    method_option :port, type: :numeric, default: 3000, banner: 'PORT the server listen port'
+    method_option :host, type: :string, default: '127.0.0.1', banner: 'HOST the host address to bind to'
+    method_option :port, type: :numeric, default: 3000, banner: 'PORT the port to bind to'
     def server # rubocop:disable Metrics/AbcSize
       # install dependencies for rails assets
       config.install_dependencies
@@ -69,6 +70,7 @@ module Fronton
       Rack::Server.start(
         app: app,
         environment: 'development',
+        Host: options[:host],
         Port: options[:port]
       )
     end
