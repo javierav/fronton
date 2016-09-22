@@ -51,10 +51,12 @@ module Fronton
         def asset_path(path, _options = {})
           "/assets/#{path}"
         end
+        alias_method :'asset-path', :asset_path
 
         def asset_url(path, _options = {})
           "url(#{asset_path(path)})"
         end
+        alias_method :'asset-url', :asset_url
       end
 
       conf = config
@@ -98,10 +100,12 @@ module Fronton
           path = self.class.superclass.fronton_config.manifest.assets[path]
           "#{self.class.superclass.fronton_config.assets_url}/#{path}"
         end
+        alias_method :'asset-path', :asset_path
 
         def asset_url(path, _options = {})
           "url(#{asset_path(path)})"
         end
+        alias_method :'asset-url', :asset_url
       end
 
       config.environment.context_class.fronton_config = config
