@@ -3,6 +3,7 @@ require 'logger'
 require 'yaml'
 require 'sprockets'
 require 'fronton/dependency'
+require 'fronton/context'
 
 module Fronton
   class Config
@@ -43,7 +44,7 @@ module Fronton
     end
 
     def assets_url
-      @config['assets_url'] || '/assets'
+      @config['assets_url']
     end
 
     def output
@@ -108,6 +109,9 @@ module Fronton
         if defined? RailsAssets
           RailsAssets.load_paths.each { |path| env.append_path path }
         end
+
+        # context helpers
+        env.context_class.send :include, ::Fronton::Context
 
         env
       end

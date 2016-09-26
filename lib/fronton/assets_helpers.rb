@@ -2,7 +2,7 @@ module Fronton
   class AssetsHelpers
     def initialize(options = {})
       @use_digest = options.fetch(:digest, false)
-      @prefix     = options.fetch(:prefix, 'assets')
+      @prefix     = options.fetch(:prefix, '/assets')
       @manifest   = options.fetch(:manifest)
     end
 
@@ -18,7 +18,7 @@ module Fronton
 
     def asset_path(name)
       asset_name = @use_digest && @manifest.assets[name] ? @manifest.assets[name] : name
-      "/#{@prefix}/#{asset_name}"
+      File.join(@prefix, asset_name)
     end
   end
 end

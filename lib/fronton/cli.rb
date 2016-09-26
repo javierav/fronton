@@ -48,17 +48,8 @@ module Fronton
       config.require_dependencies
 
       # assets helpers
-      config.environment.context_class.class_eval do
-        def asset_path(path, _options = {})
-          "/assets/#{path}"
-        end
-        alias_method :'asset-path', :asset_path
-
-        def asset_url(path, _options = {})
-          "url(#{asset_path(path)})"
-        end
-        alias_method :'asset-url', :asset_url
-      end
+      config.environment.context_class.digest_assets = false
+      config.environment.context_class.assets_prefix = '/assets'
 
       conf = config
 
@@ -93,24 +84,9 @@ module Fronton
       end
 
       # assets helpers
-      config.environment.context_class.class_eval do
-        class << self
-          attr_accessor :fronton_config
-        end
-
-        def asset_path(path, _options = {})
-          path = self.class.superclass.fronton_config.manifest.assets[path]
-          "#{self.class.superclass.fronton_config.assets_url}/#{path}"
-        end
-        alias_method :'asset-path', :asset_path
-
-        def asset_url(path, _options = {})
-          "url(#{asset_path(path)})"
-        end
-        alias_method :'asset-url', :asset_url
-      end
-
-      config.environment.context_class.fronton_config = config
+      prefix = "#{config.assets_url}/assets"
+      config.environment.context_class.digest_assets = true
+      config.environment.context_class.assets_prefix = prefix
 
       # compile assets
       config.manifest.compile(config.assets)
