@@ -24,6 +24,12 @@ $ gem install fronton
 ```
 
 
+## Features
+
+* Support for [RailsAssets](https://rails-assets.org).
+* Support for [LiveReload](http://livereload.com) in `fronton server` command using `--livereload`.
+
+
 ## Getting Started
 
 ### Available commands

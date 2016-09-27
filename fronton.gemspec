@@ -28,10 +28,11 @@ Gem::Specification.new do |spec|
   #
   ## DEPENDENCIES
   #
-  spec.add_dependency 'activesupport', '~> 5.0'
-  spec.add_dependency 'rack',          '~> 2.0'
-  spec.add_dependency 'sprockets',     '~> 3.7'
-  spec.add_dependency 'thor',          '~> 0.19'
+  spec.add_dependency 'activesupport',   '~> 5.0'
+  spec.add_dependency 'rack',            '~> 2.0'
+  spec.add_dependency 'rack-livereload', '~> 0.3'
+  spec.add_dependency 'sprockets',       '~> 3.7'
+  spec.add_dependency 'thor',            '~> 0.19'
 
   #
   ## DEVELOPMENT DEPENDENCIES

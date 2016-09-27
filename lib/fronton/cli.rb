@@ -1,5 +1,6 @@
 require 'fileutils'
 require 'rack'
+require 'rack/livereload'
 require 'thor'
 require 'fronton/config'
 require 'fronton/html_server'
@@ -40,6 +41,7 @@ module Fronton
     desc 'server', 'Preview your app in browser'
     method_option :host, type: :string, default: '127.0.0.1', banner: 'HOST the host address to bind to'
     method_option :port, type: :numeric, default: 3000, banner: 'PORT the port to bind to'
+    method_option :livereload, type: :boolean, default: false, banner: 'BOOLEAN enable or disable livereload support'
     def server # rubocop:disable Metrics/AbcSize
       # install dependencies for rails assets
       config.install_dependencies
@@ -52,10 +54,14 @@ module Fronton
       config.environment.context_class.assets_prefix = '/assets'
 
       conf = config
+      opts = options
 
       app = Rack::Builder.new do
         map('/assets') { run conf.environment }
-        map('/') { run Fronton::HTMLServer.new(config: conf) }
+        map('/') do
+          use Rack::LiveReload if opts[:livereload]
+          run Fronton::HTMLServer.new(config: conf)
+        end
       end
 
       Rack::Server.start(
