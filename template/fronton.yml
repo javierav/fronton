@@ -1,7 +1,5 @@
 assets:
-  - application.js
-  - application.css
-  - "*.png"
+  - otherfile.js
 assets_paths:
   - assets/javascripts
   - assets/stylesheets

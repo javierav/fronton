@@ -9,6 +9,10 @@ module Fronton
   class Config
     class YAMLNotFound < StandardError; end
 
+    PRECOMPILE_CRITERIA = lambda do |logical_path, filename|
+      filename.start_with?(Dir.pwd) && !['.js', '.css', ''].include?(File.extname(logical_path))
+    end
+
     def self.load!
       file = Pathname.pwd.join('fronton.yml')
 
@@ -30,7 +34,10 @@ module Fronton
     #
 
     def assets
-      @assets ||= @config['assets'].is_a?(Array) ? @config['assets'] : []
+      @assets ||= begin
+        assets_conf = @config['assets'].is_a?(Array) ? @config['assets'] : []
+        [PRECOMPILE_CRITERIA, /(?:\/|\\|\A)application\.(css|js)$/] + assets_conf
+      end
     end
 
     def assets_paths

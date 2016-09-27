@@ -39,13 +39,12 @@ $ gem install fronton
 ### Config file
 
 Configuration options are readed from a `fronton.yml` file located in project
-top folder.
+top folder. `application.js`, `application.css` and all non js&css files in
+*assets_paths* are already added.
 
 ```yaml
 assets:
-  - application.js
-  - application.css
-  - "*.png"
+  - otherfile.js
 assets_paths:
   - assets/javascripts
   - assets/stylesheets
@@ -72,7 +71,7 @@ pages_paths:
 
 | Attribute     | Type   | Description                                                |
 | ------------- | ------ | ---------------------------------------------------------- |
-| assets        | Array  | List of assets to compile (only js and css files)          |
+| assets        | Array  | List of assets to compile (non js&css already included)    |
 | assets_paths  | Array  | List of directories where Sprockets find files for require |
 | assets_url    | String | URL for assets in production                               |
 | compressors   | Hash   | Hash with selected compressors by type                     |
