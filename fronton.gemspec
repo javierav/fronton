@@ -32,6 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rack',            '~> 2.0'
   spec.add_dependency 'rack-livereload', '~> 0.3'
   spec.add_dependency 'sprockets',       '~> 3.7'
+  spec.add_dependency 'tilt',            '~> 2.0'
   spec.add_dependency 'thor',            '~> 0.19'
 
   #
