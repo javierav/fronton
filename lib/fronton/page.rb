@@ -9,6 +9,7 @@ module Fronton
       @name   = name
       @config = options.fetch(:config)
       @digest = options.fetch(:digest, false)
+      @prefix = options.fetch(:prefix, '/assets')
       @url    = url
     end
 
@@ -18,7 +19,9 @@ module Fronton
 
     def save
       with_digest do
-        File.open(save_path, 'w') { |f| f.write(content) }
+        with_prefix "#{config.assets_url}/assets" do
+          File.open(save_path, 'w') { |f| f.write(content) }
+        end
       end
     end
 
@@ -43,7 +46,7 @@ module Fronton
     end
 
     def helpers_options
-      { digest: @digest, manifest: @config.manifest }
+      { digest: @digest, manifest: @config.manifest, prefix: @prefix }
     end
 
     def save_path
@@ -52,6 +55,13 @@ module Fronton
 
     def with_digest
       @digest = true; yield; @digest = false # rubocop:disable Style/Semicolon
+    end
+
+    def with_prefix(prefix)
+      old_prefix = @prefix
+      @prefix = prefix
+      yield
+      @prefix = old_prefix
     end
   end
 end

@@ -2,7 +2,7 @@ module Fronton
   class AssetsHelpers
     def initialize(options = {})
       @use_digest = options.fetch(:digest, false)
-      @prefix     = options.fetch(:prefix, '/assets')
+      @prefix     = options.fetch(:prefix)
       @manifest   = options.fetch(:manifest)
     end
 
