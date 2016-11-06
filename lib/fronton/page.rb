@@ -1,28 +1,21 @@
 require 'tilt'
-require 'fronton/assets_helpers'
+require 'fronton/contexts/tilt'
 
 module Fronton
   class Page
-    attr_reader :name, :url, :config
+    attr_reader :name, :url
 
-    def initialize(name, url, options = {})
+    def initialize(name, url)
       @name   = name
-      @config = options.fetch(:config)
-      @digest = options.fetch(:digest, false)
-      @prefix = options.fetch(:prefix, '/assets')
       @url    = url
     end
 
     def content
-      Tilt.new(template_path, template_options).render(AssetsHelpers.new(helpers_options))
+      Tilt.new(template_path, template_options).render(Fronton::Contexts::Tilt.new)
     end
 
     def save
-      with_digest do
-        with_prefix "#{config.assets_url}/assets" do
-          File.open(save_path, 'w') { |f| f.write(content) }
-        end
-      end
+      File.open(save_path, 'w') { |f| f.write(content) }
     end
 
     def exist?
@@ -30,6 +23,10 @@ module Fronton
     end
 
     private
+
+    def config
+      Fronton::Config
+    end
 
     def template_path
       found_path = config.pages_paths.find do |path|
@@ -45,23 +42,8 @@ module Fronton
       { disable_escape: true, pretty: true }
     end
 
-    def helpers_options
-      { digest: @digest, manifest: @config.manifest, prefix: @prefix }
-    end
-
     def save_path
       config.output.join("#{File.basename(name, '.*')}.html")
-    end
-
-    def with_digest
-      @digest = true; yield; @digest = false # rubocop:disable Style/Semicolon
-    end
-
-    def with_prefix(prefix)
-      old_prefix = @prefix
-      @prefix = prefix
-      yield
-      @prefix = old_prefix
     end
   end
 end

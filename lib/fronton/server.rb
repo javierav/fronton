@@ -1,11 +1,7 @@
 require 'fronton/page'
 
 module Fronton
-  class HTMLServer
-    def initialize(options = {})
-      @config = options.fetch(:config)
-    end
-
+  class Server
     # Rack entrypoint
     def call(env)
       if page = requested_page(env) # rubocop:disable Lint/AssignmentInCondition
@@ -16,7 +12,7 @@ module Fronton
           error_404
         end
       else
-        fallback = @config.fallback_page
+        fallback = config.fallback_page
 
         if fallback
           render_page(fallback)
@@ -28,8 +24,12 @@ module Fronton
 
     private
 
+    def config
+      Fronton::Config
+    end
+
     def requested_page(env)
-      @config.pages.find { |page| page.url == env['PATH_INFO'] }
+      config.pages.find { |page| page.url == env['PATH_INFO'] }
     end
 
     def render_page(page)

@@ -9,7 +9,7 @@ assets_paths:
   - vendor/stylesheets
   - vendor/fonts
   - vendor/images
-assets_url: https://assets.example.com
+base_url: https://assets.example.com
 compressors:
   css: scss
   js: uglifier

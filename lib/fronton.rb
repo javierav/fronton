@@ -1,3 +1,6 @@
 require 'active_support/core_ext/class/attribute'
+require 'active_support/core_ext/module/attribute_accessors'
+require 'active_support/core_ext/module/aliasing'
+require 'active_support/deprecation'
 require 'fronton/version'
 require 'fronton/cli'
