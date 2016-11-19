@@ -18,10 +18,13 @@ module Fronton
     include Fronton::Commands::Clobber
     include Fronton::Commands::Info
 
-    Fronton::Config.load!
-
     no_commands do
       def config
+        unless @loaded
+          @loaded = true
+          Fronton::Config.load!
+        end
+
         Fronton::Config
       end
     end
